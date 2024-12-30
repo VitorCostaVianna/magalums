@@ -1,4 +1,4 @@
-package vitor.projects.magalums;
+ package vitor.projects.magalums;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

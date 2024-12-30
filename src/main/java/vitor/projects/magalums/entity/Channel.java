@@ -9,18 +9,23 @@ import jakarta.persistence.Table;
 public class Channel {
     
     @Id
-    private String channelId;
+    private Long channelId;
 
     private String description;
 
     public Channel() {
     }
 
-    public String getChannelId() {
+    public Channel(Long channelId, String description) {
+        this.channelId = channelId;
+        this.description = description;
+    }
+
+    public Long getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(String channelId) {
+    public void setChannelId(Long channelId) {
         this.channelId = channelId;
     }
 
@@ -30,6 +35,25 @@ public class Channel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    // possible values for channel
+    public enum Values{
+        EMAIL(1L, "Email"),
+        SMS(2L, "SMS"),
+        PUSH(3L, "Push"),
+        WHATSAPP(4L, "WhatsApp"),;
+
+        private Long id;
+        private String description;
+        private Values(Long id, String description) {
+            this.id = id;
+            this.description = description;
+        }
+
+        public Channel toChannel(){
+            return new Channel(id , description);
+        }
     }
 
     
