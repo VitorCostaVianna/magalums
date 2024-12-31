@@ -1,6 +1,7 @@
 package vitor.projects.magalums.service;
 
 import vitor.projects.magalums.entity.Notification;
+import vitor.projects.magalums.entity.Status;
 
 import java.util.Optional;
 
@@ -26,5 +27,13 @@ public class NotificationService {
         return notificationRepository.findById(notificationId);
     }
 
+    public void cancelNotification(Long notificationId) {
+         var notification = notificationRepository.findById(notificationId);
+
+         if (notification.isPresent()) {
+            notification.get().setStatus(Status.Values.CANCELED.toStatus());
+            notificationRepository.save(notification.get());
+        }
+    }
 
 }
