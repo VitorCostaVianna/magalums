@@ -87,6 +87,4 @@ public class Notification {
         this.status = status;
     }
 
-    
-
 }

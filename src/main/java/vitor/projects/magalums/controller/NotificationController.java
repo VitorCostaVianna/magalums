@@ -1,12 +1,15 @@
 package vitor.projects.magalums.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import vitor.projects.magalums.controller.dto.SchedudleNotificationDto;
+import vitor.projects.magalums.entity.Notification;
 import vitor.projects.magalums.service.NotificationService;
 
 @RestController
@@ -26,5 +29,16 @@ public class NotificationController {
         notificationService.scheduleNotification(dto);
         
         return ResponseEntity.accepted().build();
+   }
+
+   @GetMapping("/{notificationId}")
+   public ResponseEntity<Notification> getNotification(@PathVariable Long notificationId) {
+       var notification = notificationService.findById(notificationId);
+
+       if (notification.isEmpty()) {
+           return ResponseEntity.notFound().build();
+       }
+
+       return ResponseEntity.ok(notification.get());
    }
 }

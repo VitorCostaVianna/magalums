@@ -1,5 +1,9 @@
 package vitor.projects.magalums.service;
 
+import vitor.projects.magalums.entity.Notification;
+
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import vitor.projects.magalums.controller.dto.SchedudleNotificationDto;
@@ -17,4 +21,10 @@ public class NotificationService {
     public void scheduleNotification(SchedudleNotificationDto dto) {
         notificationRepository.save(dto.toNotification());
     }
+
+    public Optional<Notification> findById(Long notificationId) {
+        return notificationRepository.findById(notificationId);
+    }
+
+
 }
