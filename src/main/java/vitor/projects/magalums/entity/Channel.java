@@ -1,5 +1,7 @@
 package vitor.projects.magalums.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -37,6 +39,20 @@ public class Channel {
         this.description = description;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Channel channel = (Channel) obj;
+        return Objects.equals(channelId, channel.channelId) &&
+               Objects.equals(description, channel.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(channelId, description);
+    }
+
     // possible values for channel
     public enum Values{
         EMAIL(1L, "Email"),
@@ -55,6 +71,5 @@ public class Channel {
             return new Channel(id , description);
         }
     }
-
     
 }
